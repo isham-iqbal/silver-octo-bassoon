@@ -2,15 +2,13 @@ from django.contrib import admin
 
 from polls.models import Bar
 
+
 class BarAdmin(admin.ModelAdmin):
     model = Bar
 
-    fields = (
-        "value",
-    )
+    fields = ("value",)
 
-    list_display = (
-        "value",
-    )
+    list_display = ("value",)
+
 
 admin.site.register(Bar, BarAdmin)
