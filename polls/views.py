@@ -13,9 +13,12 @@ from polls.serializers import BarSerializer
 
 logger = logging.getLogger(__name__)
 
+
 class FooAPIView(GenericAPIView):
     def get(self, request, format=None):
+
         return Response(status=status.HTTP_200_OK)
+
 
 class BarsAPIView(ListAPIView):
     queryset = Bar.objects.all()
@@ -27,8 +30,8 @@ class BarsAPIView(ListAPIView):
 
         return context
 
+
 class BarAPIView(GenericAPIView):
-     
     def post(self, request, format=None):
 
         serializer = BarSerializer(data=request.data)
@@ -41,4 +44,3 @@ class BarAPIView(GenericAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-

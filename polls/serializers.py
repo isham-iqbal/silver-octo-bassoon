@@ -1,8 +1,8 @@
-
 from rest_framework.serializers import Serializer, ModelSerializer
 from rest_framework.fields import SerializerMethodField
 
 from polls.models import Bar
+
 
 class BarSerializer(ModelSerializer):
 
@@ -22,5 +22,5 @@ class BarSerializer(ModelSerializer):
         if self.context["bor_value"] is None:
 
             return "None"
-        
+
         return "Exist"
