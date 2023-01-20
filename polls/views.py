@@ -21,6 +21,12 @@ class BarsAPIView(ListAPIView):
     queryset = Bar.objects.all()
     serializer_class = BarSerializer
 
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context["bor_value"] = None
+
+        return context
+
 class BarAPIView(GenericAPIView):
      
     def post(self, request, format=None):
