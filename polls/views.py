@@ -1,12 +1,13 @@
+import asyncio
 import logging
 
-from django.shortcuts import render
 from rest_framework.generics import (
     GenericAPIView,
     ListAPIView,
 )
 from rest_framework import status
 from rest_framework.response import Response
+from polls.async_drf.views import AsyncGenericAPIView
 
 from polls.models import Bar
 from polls.serializers import BarSerializer
@@ -14,8 +15,12 @@ from polls.serializers import BarSerializer
 logger = logging.getLogger(__name__)
 
 
-class FooAPIView(GenericAPIView):
-    def get(self, request, format=None):
+class FooAPIView(AsyncGenericAPIView):
+    async def get(self, request, format=None):
+
+        await asyncio.sleep(1)
+
+        await Bar.objects.acount()
 
         return Response(status=status.HTTP_200_OK)
 
@@ -25,6 +30,7 @@ class BarsAPIView(ListAPIView):
     serializer_class = BarSerializer
 
     def get_serializer_context(self):
+
         context = super().get_serializer_context()
         context["bor_value"] = None
 
